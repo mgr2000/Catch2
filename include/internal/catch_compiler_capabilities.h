@@ -65,6 +65,17 @@
 
 #endif // __clang__
 
+#ifdef _MSC_VER
+#       define CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS \
+			__pragma(warning(push)) \
+			__pragma(warning(disable: 4625)) /* copy constructor was implicitly defined as deleted */\
+			__pragma(warning(disable: 4626)) /* assignment operator was implicitly defined as deleted */ \
+			__pragma(warning(disable: 5026)) /* move constructor was implicitly defined as deleted */ \
+			__pragma(warning(disable: 5027)) /* move assignment operator was implicitly defined as deleted */
+#       define CATCH_INTERNAL_UNSUPPRESS_GLOBALS_WARNINGS \
+			__pragma(warning(pop))
+#endif // _MSC_VER
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Assume that non-Windows platforms support posix signals by default
